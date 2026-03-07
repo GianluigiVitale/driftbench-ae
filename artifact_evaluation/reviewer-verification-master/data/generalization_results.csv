@@ -1,0 +1,5 @@
+holdout_type,train_r2,test_r2,test_mae,n_train,n_test
+hardware,1.0,0.9094,1.26,284,136
+precision,0.9999,0.7626,4.14,404,16
+framework,1.0,0.4789,2.79,256,164
+model,0.9999,0.1181,8.47,332,88
