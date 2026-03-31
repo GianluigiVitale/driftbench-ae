@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This artifact validates "DriftBench: Measuring and Predicting Infrastructure Drift in LLM Serving Systems" through three self-contained evaluation paths: (1) GPU reproduction to reproduce H100→B200 drift (30 min), (2) PRI model retraining reproducing all 10 R² values from Table 2 (5 min), or (3) automated verification of all 34 numerical claims (1 min). Complete dataset: 236,985 prompt-response pairs across 105 configurations (5 models, 4 GPUs, 3 frameworks, 3 precisions). All code (MIT) and data (CC BY 4.0) are open-source.
+This artifact validates "DriftBench: Measuring and Predicting Infrastructure Drift in LLM Serving Systems" through three self-contained evaluation paths: (1) GPU reproduction to reproduce H100→B200 drift (30 min), (2) PRI model retraining reproducing all 10 R² values from Table 1 (5 min), or (3) automated verification of all 34 numerical claims (1 min). Complete dataset: 236,985 prompt-response pairs across 105 configurations (5 models, 4 GPUs, 3 frameworks, 3 precisions). All code (MIT) and data (CC BY 4.0) are open-source.
 
 ---
 
@@ -22,11 +22,11 @@ This artifact validates "DriftBench: Measuring and Predicting Infrastructure Dri
 - **How much disk space required (approximately)?:** 100MB (CPU-only). ~70GB for GPU reproduction (model weights)
 - **How much time is needed to prepare workflow (approximately)?:** Path B/C: 5 minutes. Path A: 30 minutes–1 hour
 - **How much time is needed to complete experiments (approximately)?:** 1–30 minutes depending on path
-- **Publicly available?:** Yes (GitHub; will be uploaded to Zenodo as per artifact evaluation guidelines)
+- **Publicly available?:** Yes (GitHub + Zenodo: [https://doi.org/10.5281/zenodo.19361066](https://doi.org/10.5281/zenodo.19361066))
 - **Code licenses (if publicly available)?:** MIT
 - **Data licenses (if publicly available)?:** CC BY 4.0
 - **Workflow framework used?:** Python scripts, bash scripts
-- **Archived (provide DOI)?:** Dataset information provided in artifact appendix PDF (formal DOI to be provided after AE)
+- **Archived (provide DOI)?:** [10.5281/zenodo.19361066](https://doi.org/10.5281/zenodo.19361066)
 
 ---
 
@@ -40,7 +40,7 @@ Public repositories:
 2. **Artifact Evaluation:** https://github.com/GianluigiVitale/driftbench-ae — All three evaluation paths (A, B, C), scripts, data, and GPU reproduction package.
 3. **DriftBench CLI:** https://github.com/GianluigiVitale/driftbench — Analyze existing results from 105 configurations.
 
-Full dataset (236,985 pairs, 400MB) information is provided in the artifact appendix PDF — **not required** for evaluation (all verification uses local CSV summaries).
+Full dataset (236,985 pairs, 400MB) archived on Zenodo: [https://doi.org/10.5281/zenodo.19361066](https://doi.org/10.5281/zenodo.19361066) — **not required** for evaluation (all verification uses local CSV summaries).
 
 ---
 
@@ -89,7 +89,7 @@ python compute_direct_flip_rate.py
 
 ### Path B: PRI Model Retraining (CPU-only, 5 min)
 
-**What:** Retrain PRI model from raw data to reproduce all 10 R² values in Table 2 (Hardware, Precision, Framework, Model dimensions with Training + Test R² each).
+**What:** Retrain PRI model from raw data to reproduce all 10 R² values in Table 1 (Hardware, Precision, Framework, Model dimensions with Training + Test R² each).
 
 **Requirements:** Python 3.8+, standard libraries.
 
@@ -108,9 +108,9 @@ python train_pri_enhanced.py
 python validate_generalization_enhanced.py
 ```
 
-**Expected:** All 10 R² values match Table 2 from the paper exactly (Train R²: 4×1.000; Test R²: Hardware 0.909, Precision 0.763, Framework 0.479, Model 0.118).
+**Expected:** All 10 R² values match Table 1 from the paper exactly (Train R²: 4×1.000; Test R²: Hardware 0.909, Precision 0.763, Framework 0.479, Model 0.118).
 
-**Table: PRI Generalization to Held-Out Dimensions (Table 2 from paper)**
+**Table: PRI Generalization to Held-Out Dimensions (Table 1 from paper)**
 
 | Dimension | Train | Test | Tr R² | Te R² |
 |-----------|-------|------|-------|-------|
@@ -165,13 +165,13 @@ All data included in repositories:
 - Human annotations: 516 safety labels (safe/unsafe outputs), 100 semantic similarity labels (chat baseline comparison)
 - Complete experimental matrix: 525 experiments (84% coverage: 105 of 125 planned configs)
 
-Full dataset (236,985 pairs, 400MB) information is provided in the artifact appendix PDF — **not required** for evaluation.
+Full dataset (236,985 pairs, 400MB) archived on Zenodo: [https://doi.org/10.5281/zenodo.19361066](https://doi.org/10.5281/zenodo.19361066) — **not required** for evaluation.
 
 ---
 
 ## Key Claims Mapping
 
-- **Table 2 (PRI Generalization):** Path B (PRI retraining), Path C (verification scripts)
+- **Table 1 (PRI Generalization):** Path B (PRI retraining), Path C (verification scripts)
 - **Section 3.3 (Production case):** Path A (GPU reproduction)
 - **All 34 numerical claims:** Path C (verification master script)
 
