@@ -155,7 +155,7 @@ def main():
         v.warning('2.x', 'Production validation', 'Data not found in flip_rates.csv')
     
     print("\n" + "="*80)
-    print("SECTION 3: PRI GENERALIZATION (Table 1)")
+    print("SECTION 3: PRI GENERALIZATION (Table 2)")
     print("="*80)
     
     try:

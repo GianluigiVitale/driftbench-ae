@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This artifact validates "DriftBench: Measuring and Predicting Infrastructure Drift in LLM Serving Systems" through three self-contained evaluation paths: (1) GPU reproduction to reproduce H100→B200 drift (30 min), (2) PRI model retraining reproducing all 10 R² values from Table 1 (5 min), or (3) automated verification of all 34 numerical claims (1 min). Complete dataset: 236,985 prompt-response pairs across 105 configurations (5 models, 4 GPUs, 3 frameworks, 3 precisions). All code (MIT) and data (CC BY 4.0) are open-source.
+This artifact validates "DriftBench: Measuring and Predicting Infrastructure Drift in LLM Serving Systems" through three self-contained evaluation paths: (1) GPU reproduction to reproduce H100→B200 drift (30 min), (2) PRI model retraining reproducing all 10 R² values from Table 2 (5 min), or (3) automated verification of all 34 numerical claims (1 min). Complete dataset: 236,985 prompt-response pairs across 105 configurations (5 models, 4 GPUs, 3 frameworks, 3 precisions). All code (MIT) and data (CC BY 4.0) are open-source.
 
 ---
 
@@ -89,7 +89,7 @@ python compute_direct_flip_rate.py
 
 ### Path B: PRI Model Retraining (CPU-only, 5 min)
 
-**What:** Retrain PRI model from raw data to reproduce all 10 R² values in Table 1 (Hardware, Precision, Framework, Model dimensions with Training + Test R² each).
+**What:** Retrain PRI model from raw data to reproduce all 10 R² values in Table 2 (Hardware, Precision, Framework, Model dimensions with Training + Test R² each).
 
 **Requirements:** Python 3.8+, standard libraries.
 
@@ -108,9 +108,9 @@ python train_pri_enhanced.py
 python validate_generalization_enhanced.py
 ```
 
-**Expected:** All 10 R² values match Table 1 from the paper exactly (Train R²: 4×1.000; Test R²: Hardware 0.909, Precision 0.763, Framework 0.479, Model 0.118).
+**Expected:** All 10 R² values match Table 2 from the paper exactly (Train R²: 4×1.000; Test R²: Hardware 0.909, Precision 0.763, Framework 0.479, Model 0.118).
 
-**Table: PRI Generalization to Held-Out Dimensions (Table 1 from paper)**
+**Table: PRI Generalization to Held-Out Dimensions (Table 2 from paper)**
 
 | Dimension | Train | Test | Tr R² | Te R² |
 |-----------|-------|------|-------|-------|
@@ -171,7 +171,7 @@ Full dataset (236,985 pairs, 400MB) archived on Zenodo: [https://doi.org/10.5281
 
 ## Key Claims Mapping
 
-- **Table 1 (PRI Generalization):** Path B (PRI retraining), Path C (verification scripts)
+- **Table 2 (PRI Generalization):** Path B (PRI retraining), Path C (verification scripts)
 - **Section 3.3 (Production case):** Path A (GPU reproduction)
 - **All 34 numerical claims:** Path C (verification master script)
 
