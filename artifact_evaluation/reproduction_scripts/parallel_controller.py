@@ -661,7 +661,7 @@ def main():
     print(f"\nRunning experiments... please wait\n")
     
     # Progress monitoring loop
-    while not work_queue.empty() or any(w.is_alive() for w in workers):
+    while completed + failed < total_experiments:
         # Collect completed results
         while not results_queue.empty():
             config_id, success, row_data = results_queue.get()
@@ -669,32 +669,27 @@ def main():
                 completed += 1
             else:
                 failed += 1
-            
+
             # Print updated progress
             total_done = completed + failed
             elapsed = time.time() - start_time
             rate = total_done / elapsed if elapsed > 0 else 0
             eta = (total_experiments - total_done) / rate if rate > 0 else 0
-            
+
             print(f"\r[{total_done}/{total_experiments}] ✓ {completed} completed | ✗ {failed} failed | "
                   f"⏱️ {elapsed:.0f}s elapsed | ETA: {eta:.0f}s", end='', flush=True)
-        
+
         time.sleep(1)  # Update every second
-    
-    # Final drain of results queue
-    while not results_queue.empty():
-        config_id, success, row_data = results_queue.get()
-        if success:
-            completed += 1
-        else:
-            failed += 1
-    
+
     # Stop workers
-    for _ in range(num_workers):
-        work_queue.put(None)  # Poison pill
-    
     for worker in workers:
-        worker.join()
+        worker.running = False
+
+    for _ in range(num_workers):
+        work_queue.put(None)  # Poison pill (in case worker is blocked on get)
+
+    for worker in workers:
+        worker.join(timeout=5)
     
     # Final summary
     total_time = time.time() - start_time

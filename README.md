@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This artifact validates "DriftBench: Measuring and Predicting Infrastructure Drift in LLM Serving Systems" through three self-contained evaluation paths: (1) GPU reproduction to reproduce H100→B200 drift (30 min), (2) PRI model retraining reproducing all 10 R² values from Table 2 (5 min), or (3) automated verification of all 34 numerical claims (1 min). Complete dataset: 236,985 prompt-response pairs across 105 configurations (5 models, 4 GPUs, 3 frameworks, 3 precisions). All code (MIT) and data (CC BY 4.0) are open-source.
+This artifact validates "DriftBench: Measuring and Predicting Infrastructure Drift in LLM Serving Systems" through three self-contained evaluation paths: (1) GPU reproduction to reproduce H100→B200 drift (30 min), (2) PRI model retraining reproducing all 10 R² values from Table 2 (5 min), or (3) automated verification of all 31 numerical claims (1 min). Complete dataset: 236,985 prompt-response pairs across 105 configurations (5 models, 4 GPUs, 3 frameworks, 3 precisions). All code (MIT) and data (CC BY 4.0) are open-source.
 
 ---
 
@@ -126,7 +126,7 @@ python validate_generalization_enhanced.py
 
 ### Path C: Automated Verification (CPU-only, 1 min)
 
-**What:** Verify all 34 numerical claims via Python scripts.
+**What:** Verify all 31 numerical claims via Python scripts.
 
 **Requirements:** Python 3.8+, standard libraries.
 
@@ -173,7 +173,7 @@ Full dataset (236,985 pairs, 400MB) archived on Zenodo: [https://doi.org/10.5281
 
 - **Table 2 (PRI Generalization):** Path B (PRI retraining), Path C (verification scripts)
 - **Section 3.3 (Production case):** Path A (GPU reproduction)
-- **All 34 numerical claims:** Path C (verification master script)
+- **All 31 numerical claims:** Path C (verification master script)
 
 ---
 
@@ -271,18 +271,18 @@ Host runpod-b200
     UserKnownHostsFile /dev/null
 ```
 
-**Between Step 2 and Step 3:** Run inference experiments on each machine following Path A instructions (see above). This will generate results in `results/Llama-3.1-8B/h100/` on the H100 instance and `results/Llama-3.1-8B/b200/` on the B200 instance.
+**Between Step 2 and Step 3:** Run inference experiments on each machine following Path A instructions (see above). This will generate results in `results/llama-3.1-8b/h100/` on the H100 instance and `results/llama-3.1-8b/b200/` on the B200 instance.
 
 ### Step 3: Transfer results folder between instances
 
 ```bash
 # Download H100 results to your local machine (choose any local folder name)
 scp -r runpod-h100:/workspace/driftbench-ae/artifact_evaluation/\
-reproduction_scripts/results/Llama-3.1-8B/h100 ./h100_results_temp
+reproduction_scripts/results/llama-3.1-8b/h100 ./h100_results_temp
 
 # Upload to B200 instance (place in correct path)
 scp -r ./h100_results_temp/* runpod-b200:/workspace/driftbench-ae/\
-artifact_evaluation/reproduction_scripts/results/Llama-3.1-8B/h100/
+artifact_evaluation/reproduction_scripts/results/llama-3.1-8b/h100/
 ```
 
 **Note:** The actual result folders on each instance are `h100/` and `b200/` (not `h100_results`). The command above downloads H100's results folder to a temporary local folder, then uploads it to the B200 instance so both machines have both sets of results before running `compute_direct_flip_rate.py`.

@@ -21,7 +21,7 @@ Issues found: None (numerical accuracy confirmed)
 
 Contains automated verification tools and validation guides.
 
-- `verification_master_script.py` - Automated verification of 34 key paper claims including dataset sizes, flip rates, PRI R² values, and production validation results. Runtime is approximately 30 seconds.
+- `verification_master_script.py` - Automated verification of 31 key paper claims including dataset sizes, flip rates, PRI R² values, and production validation results. Runtime is approximately 30 seconds.
 
 - `validate_semantic_drift_human_annotations.py` - Validates automated semantic drift measurements against 100 human categorical judgments. Computes Spearman correlation (ρ=0.804, p<0.001) between automated measurements and human assessment. Includes the data file `semantic_drift_100_human_annotations.csv` (366 KB).
 
@@ -29,7 +29,7 @@ Contains automated verification tools and validation guides.
 
 - `README.md` - Documentation for the verification scripts with usage examples and expected outputs.
 
-Run the master verification script to check all 34 paper claims:
+Run the master verification script to check all 31 paper claims:
 
 ```bash
 cd verification_scripts

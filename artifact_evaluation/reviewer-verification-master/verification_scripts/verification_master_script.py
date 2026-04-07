@@ -88,7 +88,7 @@ def main():
     print("Loading data files...")
     
     # Determine base path for data files (relative to script location)
-    script_dir = Path(__file__).parent
+    script_dir = Path(__file__).resolve().parent
     base_path = script_dir.parent / 'data'
     
     try:
